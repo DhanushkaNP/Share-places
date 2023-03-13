@@ -7,6 +7,14 @@ import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import Users from "./user/pages/Users";
 
 function App() {
+  const script = document.createElement("script");
+
+  script.src = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
+
+  script.async = true;
+
+  document.head.appendChild(script);
+
   return (
     <BrowserRouter>
       <MainNavigation />
