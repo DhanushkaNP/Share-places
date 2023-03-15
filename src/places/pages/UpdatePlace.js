@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../../shared/components/FormElements/Button";
 import Input from "../../shared/components/FormElements/Input";
+import Card from "../../shared/components/UIElements/Card";
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
@@ -58,26 +59,30 @@ function UpdatePlace() {
 
   const foundPlace = DUMMY_PLACES.find((p) => p.id === placeId);
   useEffect(() => {
-    setFormData(
-      {
-        title: {
-          value: foundPlace.title,
-          isValid: true,
+    if (foundPlace) {
+      setFormData(
+        {
+          title: {
+            value: foundPlace.title,
+            isValid: true,
+          },
+          description: {
+            value: foundPlace.description,
+            isValid: true,
+          },
         },
-        description: {
-          value: foundPlace.description,
-          isValid: true,
-        },
-      },
-      true
-    );
+        true
+      );
+    }
     setIsLoading(false);
   }, [setFormData, foundPlace]);
 
   if (!foundPlace) {
     return (
       <div className="center">
-        <h2>Could not find place!</h2>
+        <Card>
+          <h2>Could not find place!</h2>
+        </Card>
       </div>
     );
   }

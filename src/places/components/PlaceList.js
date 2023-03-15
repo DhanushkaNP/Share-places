@@ -1,3 +1,4 @@
+import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
 import PlaceItem from "./PlaceItem";
 import "./PlaceList.css";
@@ -8,7 +9,7 @@ function PlaceList(props) {
       <div className="place-list center">
         <Card>
           <h1>Nothing found!!!. Maybe create one?</h1>
-          <button>Share places</button>
+          <Button to="/places/new">Share places</Button>
         </Card>
       </div>
     );
