@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import NewPlace from "./places/pages/NewPlace";
@@ -7,8 +7,19 @@ import UserPlaces from "./places/pages/UserPlaces";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import Auth from "./user/pages/Auth";
 import Users from "./user/pages/Users";
+import { AuthContext } from "./shared/context/auth-context";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const login = useCallback(() => {
+    setIsLoggedIn(true);
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+  }, []);
+
   useEffect(() => {
     const script = document.createElement("script");
 
@@ -19,20 +30,39 @@ function App() {
     document.head.appendChild(script);
   }, []);
 
+  let routes;
+  if (isLoggedIn) {
+    routes = (
+      <React.Fragment>
+        <Route path="/" element={<Users />} />
+        <Route path="/:userId/places" element={<UserPlaces />} />
+        <Route path="/places/new" element={<NewPlace />} />
+        <Route path="/places/:placeId" element={<UpdatePlace />} />
+        <Route path="*" element={<Users />} />
+      </React.Fragment>
+    );
+  } else {
+    routes = (
+      <React.Fragment>
+        <Route path="/" element={<Users />} />
+        <Route path="/:userId/places" element={<UserPlaces />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="*" element={<Auth />} />
+      </React.Fragment>
+    );
+  }
+
   return (
-    <BrowserRouter>
-      <MainNavigation />
-      <main>
-        <Routes>
-          <Route path="/" element={<Users />} />
-          <Route path="/:userId/places" element={<UserPlaces />} />
-          <Route path="/places/new" element={<NewPlace />} />
-          <Route path="/places/:placeId" element={<UpdatePlace />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="*" element={<Users />} />
-        </Routes>
-      </main>
-    </BrowserRouter>
+    <AuthContext.Provider
+      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
+    >
+      <BrowserRouter>
+        <MainNavigation />
+        <main>
+          <Routes>{routes}</Routes>
+        </main>
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 }
 
