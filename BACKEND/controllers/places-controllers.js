@@ -111,7 +111,7 @@ async function updatePlace(req, res, next) {
   const err = validationResult(req);
   if (!err.isEmpty()) {
     console.log(err);
-    throw new HttpError("Invalid input passed, check your inputs", 422);
+    return next(new HttpError("Invalid input passed, check your inputs", 422));
   }
 
   const { title, description } = req.body;
