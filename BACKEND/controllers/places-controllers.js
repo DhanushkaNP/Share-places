@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const { v4: uuidv4 } = require("uuid");
 const getCoordsByAddress = require("../util/location");
 const Place = require("../models/place");
+const place = require("../models/place");
 
 let DUMMY_PLACES = [
   {
@@ -29,17 +30,27 @@ let DUMMY_PLACES = [
   },
 ];
 
-function getPlaceById(req, res, next) {
+async function getPlaceById(req, res, next) {
   const placeId = req.params.pid;
-  const place = DUMMY_PLACES.find((p) => placeId === p.id);
+
+  let place;
+  try {
+    place = await Place.findById(placeId);
+  } catch (err) {
+    return next(
+      new HttpError("Something go wrong, couldn't find any places", 500)
+    );
+  }
 
   if (!place) {
-    throw new HttpError(
-      "Did not find any data related to given provided place id.",
-      404
+    return next(
+      new HttpError(
+        "Did not find any data related to given provided place id.",
+        404
+      )
     );
   } else {
-    res.json({ place });
+    res.json({ place: place.toObject({ getters: true }) });
   }
 }
 
@@ -69,7 +80,7 @@ async function createPlace(req, res, next) {
   } catch (err) {
     return next(err);
   }
-  console.log(coordinates);
+
   const createdPlace = new Place({
     title,
     description,
