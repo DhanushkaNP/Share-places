@@ -9,6 +9,6 @@ const userSchema = new Schema({
   places: { type: String, required: true },
 });
 
-userSchema.plugin(uniqueValidator);
+// userSchema.plugin(uniqueValidator);
 
-model.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema);

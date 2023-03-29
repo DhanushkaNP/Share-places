@@ -1,7 +1,7 @@
 const HttpError = require("../models/http-error");
 const { validationResult } = require("express-validator");
 const { v4: uuidv4 } = require("uuid");
-const User = require("../models/place");
+const User = require("../models/user");
 
 const dummyUsers = [
   {
@@ -58,20 +58,20 @@ async function signup(req, res, next) {
   res.status(201).json({ newUser: newUser.toObject({ getters: true }) });
 }
 
-function login(req, res, next) {
+async function login(req, res, next) {
   const { email, password } = req.body;
 
-  const foundUser = dummyUsers.find((u) => u.email === email);
-
-  if (!foundUser) {
-    next(new HttpError("Email not matched with any users", 404));
-  } else {
-    if (foundUser.password === password) {
-      res.status(200).json("Successfully logged in!");
-    } else {
-      next(new HttpError("Password incorrect", 404));
-    }
+  let existingUser;
+  try {
+    existingUser = await User.findOne({ email: email });
+  } catch (err) {
+    return next(new HttpError("Login failed", 422));
   }
+
+  if (!existingUser || existingUser.password != password) {
+    return next(new HttpError("Credentials are invalid"));
+  }
+  res.status(200).json("Successfully logged in!");
 }
 exports.getAllUsers = getAllUsers;
 exports.signup = signup;
