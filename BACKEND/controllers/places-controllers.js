@@ -1,8 +1,10 @@
 const HttpError = require("../models/http-error");
+const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const { v4: uuidv4 } = require("uuid");
 const getCoordsByAddress = require("../util/location");
 const Place = require("../models/place");
+const User = require("../models/user");
 const place = require("../models/place");
 
 let DUMMY_PLACES = [
@@ -98,10 +100,28 @@ async function createPlace(req, res, next) {
       "https://media.istockphoto.com/id/486334510/photo/new-york-city-skyline.jpg?s=1024x1024&w=is&k=20&c=2XpMl1tWgCAAQ55ZI4PcMYr1CQTIs7JMkpfDzJSRJiE=",
   });
 
+  let user;
   try {
-    await createdPlace.save();
+    user = await User.findById(creator);
   } catch (err) {
-    return next(new HttpError("Creating place failed, please try again", 500));
+    return next(new HttpError("Creating place failed, try again ", 500));
+  }
+
+  if (!user) {
+    return next(new HttpError("Could not found any user for provided id", 500));
+  }
+
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await createdPlace.save({ session: sess });
+    user.places.push(createdPlace);
+    await user.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
+    return next(
+      new HttpError("Creating place failed, please try again 2", 500)
+    );
   }
 
   res.status(201).json({ places: createdPlace });
@@ -142,8 +162,22 @@ async function updatePlace(req, res, next) {
 async function deletePlace(req, res, next) {
   const placeId = req.params.pid;
 
+  let place;
   try {
-    await Place.findByIdAndDelete(placeId);
+    place = await Place.findById(placeId).populate("creator");
+  } catch (err) {
+    return next(
+      new HttpError("Something went wrong couldn't delete place", 500)
+    );
+  }
+
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    place.creator.places.pull(place);
+    await place.creator.save({ session: sess });
+    await Place.findByIdAndDelete(placeId, { session: sess });
+    await sess.commitTransaction();
   } catch (err) {
     return next(
       new HttpError("Something went wrong couldn't delete the place", 500)

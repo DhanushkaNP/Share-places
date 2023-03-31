@@ -35,7 +35,7 @@ async function signup(req, res, next) {
     return next(new HttpError("Invalid input passed, check your inputs", 500));
   }
 
-  const { name, email, password, places } = req.body;
+  const { name, email, password } = req.body;
 
   let existingUser;
   try {
@@ -48,7 +48,7 @@ async function signup(req, res, next) {
     name,
     email,
     password,
-    places,
+    places: [],
     image:
       "https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?w=900&t=st=1680017853~exp=1680018453~hmac=8bc9197d6272e5497a0e1d4c09aee5fabe7433584feaced5fb2bb697accc4721",
   });
