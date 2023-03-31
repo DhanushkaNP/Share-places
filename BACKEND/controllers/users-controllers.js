@@ -36,9 +36,9 @@ async function signup(req, res, next) {
     return next(new HttpError("Signup failed", 422));
   }
 
-  if (existingUser) {
-    return next(new HttpError("User already exist", 500));
-  }
+  // if (existingUser) {
+  //   return next(new HttpError("User already exist", 500));
+  // }
 
   const newUser = new User({
     name,
@@ -50,9 +50,11 @@ async function signup(req, res, next) {
   });
 
   try {
-    newUser.save();
+    await newUser.save();
   } catch (err) {
-    return next(new HttpError("Something went wrong, error with signup", 500));
+    return next(
+      new HttpError("User email already exist, error with signup", 500)
+    );
   }
 
   res.status(201).json({ newUser: newUser.toObject({ getters: true }) });
