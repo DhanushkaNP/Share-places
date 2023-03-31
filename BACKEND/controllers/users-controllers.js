@@ -12,12 +12,20 @@ const dummyUsers = [
   },
 ];
 
-function getAllUsers(req, res, next) {
-  if (dummyUsers.length === 0) {
-    next(new HttpError("Could not find any users", 404));
-  } else {
-    res.json({ users: dummyUsers });
+async function getAllUsers(req, res, next) {
+  let users;
+  try {
+    users = await User.find({}, "-password");
+  } catch (err) {
+    return next(new HttpError("Something went wrong ", 500));
   }
+
+  if (users.length === 0) {
+    return next(new HttpError("Didn't found any user", 422));
+  }
+  res
+    .status(201)
+    .json({ users: users.map((user) => user.toObject({ getters: true })) });
 }
 
 async function signup(req, res, next) {
