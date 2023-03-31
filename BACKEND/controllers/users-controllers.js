@@ -36,10 +36,6 @@ async function signup(req, res, next) {
     return next(new HttpError("Signup failed", 422));
   }
 
-  // if (existingUser) {
-  //   return next(new HttpError("User already exist", 500));
-  // }
-
   const newUser = new User({
     name,
     email,

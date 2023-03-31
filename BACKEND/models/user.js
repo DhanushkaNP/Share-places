@@ -1,5 +1,4 @@
-const { Schema, default: mongoose, model } = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
+const { Schema, default: mongoose } = require("mongoose");
 
 const userSchema = new Schema({
   name: { type: String, required: true },
