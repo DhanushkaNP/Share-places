@@ -67,7 +67,7 @@ async function login(req, res, next) {
   if (!existingUser || existingUser.password != password) {
     return next(new HttpError("Credentials are invalid"));
   }
-  res.status(200).json("Successfully logged in!");
+  res.status(200).json({ message: "Successfully logged in!" });
 }
 exports.getAllUsers = getAllUsers;
 exports.signup = signup;
