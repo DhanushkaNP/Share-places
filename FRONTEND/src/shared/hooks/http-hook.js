@@ -20,9 +20,13 @@ function useHttpRequest() {
           signal: httpAbortCtrl.signal,
         });
         const responseData = await response.json();
+
         if (!response.ok) {
           throw new Error(responseData.message);
         }
+        activeHttpRequests.current = activeHttpRequests.current.filter(
+          (reqCtrl) => reqCtrl !== httpAbortCtrl
+        );
         setIsLoading(false);
         return responseData;
       } catch (err) {
