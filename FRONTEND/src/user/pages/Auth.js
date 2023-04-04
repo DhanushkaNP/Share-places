@@ -39,7 +39,7 @@ function Auth() {
 
     if (isLoging) {
       try {
-        await sendRequest(
+        const responseData = await sendRequest(
           "http://localhost:5000/api/users/login",
           "POST",
           {
@@ -50,11 +50,11 @@ function Auth() {
             password: formState.inputs.password.value,
           })
         );
-        auth.login();
+        auth.login(responseData.user.id);
       } catch (err) {}
     } else {
       try {
-        await sendRequest(
+        const responseData = await sendRequest(
           "http://localhost:5000/api/users/signup",
           "POST",
           {
@@ -67,7 +67,7 @@ function Auth() {
           })
         );
 
-        auth.login();
+        auth.login(responseData.user.id);
       } catch (err) {}
     }
   }
