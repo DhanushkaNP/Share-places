@@ -42,7 +42,7 @@ async function getPlacesByUserId(req, res, next) {
     next(new HttpError("Could not find places for provided user id.", 404));
   } else {
     res.json({
-      places,
+      places: places.map((place) => place.toObject({ getters: true })),
     });
   }
 }

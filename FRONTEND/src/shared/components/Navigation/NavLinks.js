@@ -14,7 +14,7 @@ function NavLinks(props) {
       </li>
       {auth.isLoggedIn && (
         <li onClick={props.onClick}>
-          <NavLink to="/u1/places">MY PLACES</NavLink>
+          <NavLink to={`/${auth.userId}/places`}>MY PLACES</NavLink>
         </li>
       )}
 
