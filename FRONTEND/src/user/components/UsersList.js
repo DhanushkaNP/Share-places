@@ -3,7 +3,7 @@ import UserItem from "./UserItem";
 import "./UsersList.css";
 
 function UsersList(props) {
-  if (props.items.length === 0) {
+  if (!props.items) {
     return (
       <div className="center">
         <Card>
