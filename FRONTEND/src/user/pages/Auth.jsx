@@ -37,7 +37,6 @@ function Auth() {
 
   async function authSubmitHandler(event) {
     event.preventDefault();
-    console.log(formState.inputs);
 
     if (isLoging) {
       try {
@@ -56,17 +55,16 @@ function Auth() {
       } catch (err) {}
     } else {
       try {
+        const formData = new FormData();
+        formData.append("name", formState.inputs.name.value);
+        formData.append("email", formState.inputs.email.value);
+        formData.append("password", formState.inputs.password.value);
+        formData.append("image", formState.inputs.image.value);
         const responseData = await sendRequest(
           "http://localhost:5000/api/users/signup",
           "POST",
-          {
-            "Content-type": "application/json",
-          },
-          JSON.stringify({
-            name: formState.inputs.name.value,
-            email: formState.inputs.email.value,
-            password: formState.inputs.password.value,
-          })
+          {},
+          formData
         );
 
         auth.login(responseData.user.id);
