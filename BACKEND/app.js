@@ -1,3 +1,4 @@
+const fs = require("fs");
 const express = require("express");
 const HttpError = require("./models/http-error");
 const mongoose = require("mongoose");
@@ -29,6 +30,11 @@ app.use("/", (res, req, next) => {
 });
 
 app.use((err, req, res, next) => {
+  if (req.file) {
+    fs.unlink(req.file.path, (err) => {
+      console.log(err);
+    });
+  }
   if (res.headerSent) {
     next(err);
   } else {
