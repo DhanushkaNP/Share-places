@@ -39,8 +39,7 @@ async function signup(req, res, next) {
     email,
     password,
     places: [],
-    image:
-      "https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?w=900&t=st=1680017853~exp=1680018453~hmac=8bc9197d6272e5497a0e1d4c09aee5fabe7433584feaced5fb2bb697accc4721",
+    image: req.file.path,
   });
 
   try {

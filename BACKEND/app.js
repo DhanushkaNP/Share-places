@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 const express = require("express");
 const HttpError = require("./models/http-error");
 const mongoose = require("mongoose");
@@ -9,6 +10,8 @@ const db_link = process.env.MONGOOSE_DATABASE;
 
 const app = express();
 app.use(express.json());
+
+app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
