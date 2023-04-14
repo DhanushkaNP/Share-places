@@ -12,6 +12,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import "./PlaceForm.css";
+import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 function NewPlace() {
   const auth = useContext(AuthContext);
@@ -26,6 +27,14 @@ function NewPlace() {
         value: "",
         isValid: false,
       },
+      address: {
+        value: "",
+        isValid: false,
+      },
+      image: {
+        value: null,
+        isValid: false,
+      },
     },
     false
   );
@@ -35,16 +44,17 @@ function NewPlace() {
   async function placeSubmitHandler(event) {
     event.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append("title", formState.inputs.title.value);
+      formData.append("description", formState.inputs.description.value);
+      formData.append("address", formState.inputs.address.value);
+      formData.append("image", formState.inputs.image.value);
+      formData.append("creator", auth.userId);
       await sendRequest(
         "http://localhost:5000/api/places",
         "POST",
-        { "Content-Type": "application/json" },
-        JSON.stringify({
-          title: formState.inputs.title.value,
-          description: formState.inputs.description.value,
-          address: formState.inputs.address.value,
-          creator: auth.userId,
-        })
+        {},
+        formData
       );
       navigate("/");
     } catch (err) {}
@@ -80,6 +90,11 @@ function NewPlace() {
           errorText="Please enter a valid Address"
           validators={[VALIDATOR_REQUIRE()]}
           onInput={inputHandler}
+        />
+        <ImageUpload
+          id="image"
+          onInput={inputHandler}
+          errorText="Pleasae provide an image."
         />
         <Button type="submit" disabled={!formState.isValid}>
           Add place

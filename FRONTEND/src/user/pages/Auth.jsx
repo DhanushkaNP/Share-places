@@ -117,7 +117,12 @@ function Auth() {
             />
           )}
           {!isLoging && (
-            <ImageUpload id="image" center onInput={inputHandler} />
+            <ImageUpload
+              id="image"
+              center
+              onInput={inputHandler}
+              errorText="Pleasae provide an image."
+            />
           )}
           <Input
             element="input"

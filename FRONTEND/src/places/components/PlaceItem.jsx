@@ -78,7 +78,10 @@ function PlaceItem(props) {
         <Card className="place-item-content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item-image">
-            <img src={props.image} alt={props.title} />
+            <img
+              src={`http://localhost:5000/${props.image}`}
+              alt={props.title}
+            />
           </div>
           <div className="place-item-info">
             <h2>{props.title}</h2>

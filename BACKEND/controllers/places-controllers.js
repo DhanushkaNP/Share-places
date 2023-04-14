@@ -69,8 +69,7 @@ async function createPlace(req, res, next) {
     address,
     location: coordinates,
     creator,
-    image:
-      "https://media.istockphoto.com/id/486334510/photo/new-york-city-skyline.jpg?s=1024x1024&w=is&k=20&c=2XpMl1tWgCAAQ55ZI4PcMYr1CQTIs7JMkpfDzJSRJiE=",
+    image: req.file.path,
   });
 
   let user;
