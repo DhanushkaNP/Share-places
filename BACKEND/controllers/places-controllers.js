@@ -1,9 +1,11 @@
+const fs = require("fs");
 const HttpError = require("../models/http-error");
 const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const getCoordsByAddress = require("../util/location");
 const Place = require("../models/place");
 const User = require("../models/user");
+const { log } = require("console");
 
 async function getPlaceById(req, res, next) {
   const placeId = req.params.pid;
@@ -143,6 +145,8 @@ async function deletePlace(req, res, next) {
     );
   }
 
+  const imagePath = place.image;
+
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
@@ -156,6 +160,9 @@ async function deletePlace(req, res, next) {
     );
   }
 
+  fs.unlink(imagePath, (err) => {
+    console.log(err);
+  });
   res.status(200).json({ message: "Deleted place" });
 }
 
