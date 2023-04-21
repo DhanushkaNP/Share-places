@@ -22,16 +22,6 @@ function App() {
     setIsLoggedIn(false);
   }, []);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-
-    script.src = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
-
-    script.async = true;
-
-    document.head.appendChild(script);
-  }, []);
-
   let routes;
   if (isLoggedIn) {
     routes = (
