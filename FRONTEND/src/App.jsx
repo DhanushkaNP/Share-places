@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import NewPlace from "./places/pages/NewPlace";
