@@ -1,6 +1,7 @@
 const HttpError = require("../models/http-error");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+var jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 async function getAllUsers(req, res, next) {
@@ -59,7 +60,24 @@ async function signup(req, res, next) {
     );
   }
 
-  res.status(201).json({ newUser: newUser.toObject({ getters: true }) });
+  let token;
+  try {
+    token = jwt.sign(
+      { userId: newUser.index, email: newUser.email },
+      "This_is_a_secret_only_for_this_project_43ff54&^ds",
+      { expiresIn: "1h" }
+    );
+  } catch (err) {
+    const error = new HttpError(
+      "User email already exist, error with signup",
+      500
+    );
+    return next(error);
+  }
+
+  res
+    .status(201)
+    .json({ userId: newUser.id, email: newUser.email, token: token });
 }
 
 async function login(req, res, next) {
