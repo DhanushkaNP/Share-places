@@ -68,10 +68,7 @@ async function signup(req, res, next) {
       { expiresIn: "1h" }
     );
   } catch (err) {
-    const error = new HttpError(
-      "User email already exist, error with signup",
-      500
-    );
+    const error = new HttpError("Signin up failed, try again!", 500);
     return next(error);
   }
 
@@ -110,9 +107,22 @@ async function login(req, res, next) {
     return next(error);
   }
 
+  let token;
+  try {
+    token = jwt.sign(
+      { userId: existingUser.index, email: existingUser.email },
+      "This_is_a_secret_only_for_this_project_43ff54&^ds",
+      { expiresIn: "1h" }
+    );
+  } catch (err) {
+    const error = new HttpError("login in failed,please try again!", 500);
+    return next(error);
+  }
+
   res.status(200).json({
-    message: "Successfully logged in!",
-    user: existingUser.toObject({ getters: true }),
+    userId: existingUser.id,
+    email: existingUser.email,
+    token: token,
   });
 }
 exports.getAllUsers = getAllUsers;
