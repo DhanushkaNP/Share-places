@@ -15,3 +15,5 @@ const checkAuth = (req, res, next) => {
     return next(error);
   }
 };
+
+module.exports = checkAuth;
