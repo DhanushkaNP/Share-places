@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import NewPlace from "./places/pages/NewPlace";
@@ -13,19 +13,41 @@ function App() {
   const [token, setToken] = useState(false);
   const [userId, setUserId] = useState(null);
 
-  const login = useCallback((uid, token) => {
+  const login = useCallback((uid, token, expirationDate) => {
     setToken(token);
     setUserId(uid);
+    const tokenExpirationData =
+      expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
     localStorage.setItem(
       "userData",
-      JSON.stringify({ userId: uid, token: token })
+      JSON.stringify({
+        userId: uid,
+        token: token,
+        expiration: tokenExpirationData.toISOString(),
+      })
     );
   }, []);
 
   const logout = useCallback(() => {
     setToken(false);
     setUserId(null);
+    localStorage.removeItem("userData");
   }, []);
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (
+      storedData &&
+      storedData.token &&
+      new Date() < new Date(storedData.expiration)
+    ) {
+      login(
+        storedData.userId,
+        storedData.token,
+        new Date(storedData.expiration)
+      );
+    }
+  }, [login]);
 
   let routes;
   if (token) {
