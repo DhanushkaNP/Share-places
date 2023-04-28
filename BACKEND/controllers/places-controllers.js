@@ -119,6 +119,13 @@ async function updatePlace(req, res, next) {
       new HttpError("Something go wrong, couldn't update the place", 500)
     );
   }
+  if (place.creator.toString() !== req.userData.userId) {
+    const error = new HttpError(
+      "You are not authorized to edit this place",
+      401
+    );
+    return next(error);
+  }
 
   place.title = title;
   place.description = description;
