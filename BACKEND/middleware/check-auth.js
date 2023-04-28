@@ -11,7 +11,7 @@ const checkAuth = (req, res, next) => {
       token,
       "This_is_a_secret_only_for_this_project_43ff54&^ds"
     );
-    res.userData = { userId: decodeToken.userId };
+    req.userData = { userId: decodeToken.userId };
     next();
   } catch (err) {
     const error = new HttpError("Authentication failed", 401);
