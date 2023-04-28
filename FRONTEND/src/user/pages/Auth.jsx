@@ -51,7 +51,7 @@ function Auth() {
             password: formState.inputs.password.value,
           })
         );
-        auth.login(responseData.user.id);
+        auth.login(responseData.userId, responseData.token);
       } catch (err) {}
     } else {
       try {
@@ -67,7 +67,7 @@ function Auth() {
           formData
         );
 
-        auth.login(responseData.user.id);
+        auth.login(responseData.userId, responseData.token);
       } catch (err) {}
     }
   }
