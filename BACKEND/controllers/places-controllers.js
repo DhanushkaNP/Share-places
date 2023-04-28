@@ -152,6 +152,14 @@ async function deletePlace(req, res, next) {
     );
   }
 
+  if (place.creator.id !== req.userData.userId) {
+    const error = new HttpError(
+      "You are not authorized to delete this place",
+      401
+    );
+    return next(error);
+  }
+
   const imagePath = place.image;
 
   try {
