@@ -63,7 +63,7 @@ async function signup(req, res, next) {
   let token;
   try {
     token = jwt.sign(
-      { userId: newUser.index, email: newUser.email },
+      { userId: newUser.id, email: newUser.email },
       "This_is_a_secret_only_for_this_project_43ff54&^ds",
       { expiresIn: "1h" }
     );
@@ -110,7 +110,7 @@ async function login(req, res, next) {
   let token;
   try {
     token = jwt.sign(
-      { userId: existingUser.index, email: existingUser.email },
+      { userId: existingUser.id, email: existingUser.email },
       "This_is_a_secret_only_for_this_project_43ff54&^ds",
       { expiresIn: "1h" }
     );
