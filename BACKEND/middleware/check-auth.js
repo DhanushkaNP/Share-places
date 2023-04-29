@@ -7,10 +7,7 @@ const checkAuth = (req, res, next) => {
   }
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const decodeToken = jwt.verify(
-      token,
-      "This_is_a_secret_only_for_this_project_43ff54&^ds"
-    );
+    const decodeToken = jwt.verify(token, process.env.JWT_KEY);
     req.userData = { userId: decodeToken.userId };
     next();
   } catch (err) {
