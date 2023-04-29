@@ -59,7 +59,7 @@ function UpdatePlace() {
       } catch (err) {}
     }
     fetchPlace();
-  }, [sendRequest, placeId]);
+  }, [sendRequest, placeId, setFormData]);
 
   if (!placeData && !error) {
     return (
