@@ -64,7 +64,7 @@ async function signup(req, res, next) {
   try {
     token = jwt.sign(
       { userId: newUser.id, email: newUser.email },
-      "This_is_a_secret_only_for_this_project_43ff54&^ds",
+      process.env.JWT_KEY,
       { expiresIn: "1h" }
     );
   } catch (err) {
@@ -111,7 +111,7 @@ async function login(req, res, next) {
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      "This_is_a_secret_only_for_this_project_43ff54&^ds",
+      process.env.JWT_KEY,
       { expiresIn: "1h" }
     );
   } catch (err) {
