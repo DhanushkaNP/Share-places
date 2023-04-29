@@ -56,7 +56,7 @@ async function createPlace(req, res, next) {
     return next(new HttpError("Invalid input passed, check your inputs", 422));
   }
 
-  const { title, description, address, creator } = req.body;
+  const { title, description, address } = req.body;
 
   let coordinates;
   try {
@@ -70,13 +70,13 @@ async function createPlace(req, res, next) {
     description,
     address,
     location: coordinates,
-    creator,
+    creator: req.userData.userId,
     image: req.file.path,
   });
 
   let user;
   try {
-    user = await User.findById(creator);
+    user = await User.findById(req.userData.userId);
   } catch (err) {
     return next(new HttpError("Creating place failed, try again ", 500));
   }
