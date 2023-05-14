@@ -44,3 +44,7 @@ public/
 
 #environmental variables
 nodemon.json
+
+
+#images
+*.jpeg
