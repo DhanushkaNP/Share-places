@@ -4,8 +4,23 @@ const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const getCoordsByAddress = require("../util/location");
 const Place = require("../models/place");
-const User = require("../models/user");
-const { log } = require("console");
+
+async function getAllPlaces(req, res, next) {
+  let places;
+  try {
+    places = await Place.find({});
+  } catch (err) {
+    return next(
+      new HttpError("Something went wrong when finding all places", 500)
+    );
+  }
+  console.log(places);
+  if (places.length === 0) {
+    return next(new HttpError("Didn't found any place", 422));
+  }
+
+  res.status(200).json({ places });
+}
 
 async function getPlaceById(req, res, next) {
   const placeId = req.params.pid;
@@ -181,6 +196,7 @@ async function deletePlace(req, res, next) {
   res.status(200).json({ message: "Deleted place" });
 }
 
+exports.getAllPlaces = getAllPlaces;
 exports.getPlaceById = getPlaceById;
 exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
