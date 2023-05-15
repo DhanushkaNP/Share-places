@@ -1,8 +1,9 @@
-import PlaceList from "../components/PlaceList";
-import useHttpRequest from "../../shared/hooks/http-hook";
+import PlaceList from "../../../places/components/PlaceList";
+import useHttpRequest from "../../hooks/http-hook";
+import ErrorModal from "../UIElements/ErrorModal";
+import LoadingSpinner from "../UIElements/LoadingSpinner";
+
 import React, { useEffect, useState } from "react";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
-import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 function Places(props) {
   const [loadedPlaces, setLoadedPlaces] = useState();
