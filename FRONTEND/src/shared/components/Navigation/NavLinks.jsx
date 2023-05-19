@@ -10,7 +10,7 @@ function NavLinks(props) {
   return (
     <ul className="nav-links">
       <li onClick={props.onClick}>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">ALL USERS</NavLink>
       </li>
       {auth.isLoggedIn && (
         <li onClick={props.onClick}>
