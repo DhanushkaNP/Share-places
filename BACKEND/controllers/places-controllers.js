@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const getCoordsByAddress = require("../util/location");
 const Place = require("../models/place");
+const User = require("../models/user");
 
 async function getAllPlaces(req, res, next) {
   let places;
