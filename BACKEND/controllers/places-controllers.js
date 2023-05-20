@@ -19,7 +19,9 @@ async function getAllPlaces(req, res, next) {
     return next(new HttpError("Didn't found any place", 422));
   }
 
-  res.status(200).json({ places });
+  res
+    .status(200)
+    .json({ places: places.map((place) => place.toObject({ getters: true })) });
 }
 
 async function getPlaceById(req, res, next) {
