@@ -15,7 +15,6 @@ async function getAllPlaces(req, res, next) {
       new HttpError("Something went wrong when finding all places", 500)
     );
   }
-  console.log(places);
   if (places.length === 0) {
     return next(new HttpError("Didn't found any place", 422));
   }
