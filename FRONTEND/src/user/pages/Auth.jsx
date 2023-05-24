@@ -8,6 +8,7 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 import { AuthContext } from "../../shared/context/auth-context";
 import useHttpRequest from "../../shared/hooks/http-hook";
+import { useNavigate } from "react-router-dom";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -16,6 +17,7 @@ import {
 import "./Auth.css";
 
 function Auth() {
+  const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const [isLoging, setIsLoging] = useState(true);
 
@@ -52,6 +54,7 @@ function Auth() {
           })
         );
         auth.login(responseData.userId, responseData.token);
+        navigate("/");
       } catch (err) {}
     } else {
       try {
@@ -68,6 +71,7 @@ function Auth() {
         );
 
         auth.login(responseData.userId, responseData.token);
+        navigate("/");
       } catch (err) {}
     }
   }
