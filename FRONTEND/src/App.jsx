@@ -11,6 +11,7 @@ import { AuthContext } from "./shared/context/auth-context";
 import useAuth from "./shared/hooks/auth-hook";
 import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
 import AllPlaces from "./places/pages/AllPlaces";
+import Home from "./Home/Home";
 
 const NewPlace = lazy(() => import("./places/pages/NewPlace"));
 const UpdatePlace = lazy(() => import("./places/pages/UpdatePlace"));
@@ -33,7 +34,8 @@ function App() {
   } else {
     routes = (
       <React.Fragment>
-        <Route path="/" element={<AllPlaces />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/places" element={<AllPlaces />} />
         <Route path="/:userId/places" element={<UserPlaces />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<Auth />} />

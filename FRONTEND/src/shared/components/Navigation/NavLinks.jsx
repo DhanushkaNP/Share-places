@@ -29,7 +29,7 @@ function NavLinks(props) {
           onClick={props.onClick}
           className="w-40 lg:w-fit h-16 lg:h-fit flex flex-col justify-center border-b-2 lg:border-0"
         >
-          <NavLink to="/sample" className={navLinkStyle}>
+          <NavLink to="/places" className={navLinkStyle}>
             Places
           </NavLink>
         </li>
