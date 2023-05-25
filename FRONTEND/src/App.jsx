@@ -11,7 +11,7 @@ import { AuthContext } from "./shared/context/auth-context";
 import useAuth from "./shared/hooks/auth-hook";
 import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
 import AllPlaces from "./places/pages/AllPlaces";
-import Home from "./Home/Home";
+import Home from "./Home/pages/Home";
 
 const NewPlace = lazy(() => import("./places/pages/NewPlace"));
 const UpdatePlace = lazy(() => import("./places/pages/UpdatePlace"));

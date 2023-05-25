@@ -1,7 +1,7 @@
 import React from "react";
-import Places from "../places/components/Places";
-import Button from "../shared/components/FormElements/Button";
-import main from "../assets/images/landing-main.png";
+import Places from "../../places/components/Places";
+import Button from "../../shared/components/FormElements/Button";
+import main from "../../assets/images/landing-main.png";
 
 function Home() {
   return (
