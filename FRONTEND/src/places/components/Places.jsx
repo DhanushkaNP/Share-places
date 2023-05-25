@@ -1,7 +1,7 @@
-import PlaceList from "../../places/components/PlaceList";
-import ErrorModal from "../components/UIElements/ErrorModal";
-import LoadingSpinner from "../components/UIElements/LoadingSpinner";
-import useHttpRequest from "../hooks/http-hook";
+import PlaceList from "./PlaceList";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import useHttpRequest from "../../shared/hooks/http-hook";
 
 import React, { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Places from "../../shared/Containers/Places";
+import Places from "../components/Places";
 
 function UserPlaces() {
   const userId = useParams().userId;

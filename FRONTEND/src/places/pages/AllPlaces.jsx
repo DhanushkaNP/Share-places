@@ -1,5 +1,5 @@
 import React from "react";
-import Places from "../../shared/Containers/Places";
+import Places from "../components/Places";
 
 function AllPlaces() {
   return <Places link={"/places/all"} />;
