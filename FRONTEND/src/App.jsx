@@ -1,10 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
-// import NewPlace from "./places/pages/NewPlace";
-// import UpdatePlace from "./places/pages/UpdatePlace";
-// import UserPlaces from "./places/pages/UserPlaces";
-// import Auth from "./user/pages/Auth";
 import Users from "./user/pages/Users";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import { AuthContext } from "./shared/context/auth-context";
