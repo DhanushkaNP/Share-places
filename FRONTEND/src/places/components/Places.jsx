@@ -35,7 +35,11 @@ function Places(props) {
         </div>
       )}
       {!isLoading && loadedPlaces && (
-        <PlaceList items={loadedPlaces} onDeletePlace={placeDeleteHandler} />
+        <PlaceList
+          main={props.main && true}
+          items={loadedPlaces}
+          onDeletePlace={placeDeleteHandler}
+        />
       )}
     </React.Fragment>
   );
