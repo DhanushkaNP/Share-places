@@ -4,7 +4,7 @@
 @tailwind utilities; 
 
 .btn{
-  @apply bg-btn text-white hover:bg-white hover:text-btn hover:border-btn border-2 py-3 px-6 rounded-md text-base font-medium transition ease-out duration-500
+  @apply bg-btn text-white hover:bg-white hover:text-btn hover:border-btn border-2 border-btn py-3 px-6 rounded-md text-base font-medium transition ease-out duration-500
 }
 
 .btn-inverse{
