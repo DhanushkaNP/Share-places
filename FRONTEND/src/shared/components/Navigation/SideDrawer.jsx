@@ -9,7 +9,7 @@ function SideDrawer(props) {
       mountOnEnter
       unmountOnExit
     >
-      <aside className="absolute bg-white z-50 h-screen w-96 shadow-2xl shadow-black">
+      <aside className="absolute bg-white z-50 h-screen w-3/4 shadow-2xl shadow-black">
         {props.children}
       </aside>
     </CSSTransition>
