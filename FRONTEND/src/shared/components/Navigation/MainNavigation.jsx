@@ -35,7 +35,7 @@ function MainNavigation(props) {
             <span className="nav-span" />
           </button>
         </div>
-        <h1 className="font-title text-3xl	text-primary my-auto ml-5 lg:ml-14 flex-5 z-20">
+        <h1 className="font-title text-3xl	text-primary my-auto ml-5 lg:ml-14 flex-5 z-30">
           <Link to="/">Share Places</Link>
         </h1>
 

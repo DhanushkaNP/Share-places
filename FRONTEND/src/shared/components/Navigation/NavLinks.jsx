@@ -14,8 +14,8 @@ function NavLinks(props) {
   };
 
   return (
-    <ul className=" flex flex-col h-full lg:flex-row gap-16 text-xl w-full ">
-      <div className="flex flex-col w-full h-full lg:justify-center lg:flex-row lg:h-20 items-end lg:items-center lg:text-xl lg:gap-32 lg:mt-0 gap-0 z-50 mt-20 text-2xl">
+    <ul className="flex flex-col h-full first:align-bottom lg:first:justify-center lg:flex-row gap-16 text-xl w-full ">
+      <div className="flex flex-col w-full lg:w-min h-full lg:justify-center lg:flex-row lg:h-20 items-end lg:items-center lg:text-xl lg:gap-32 lg:mt-0 gap-0 mt-20 text-2xl z-20">
         <li
           onClick={props.onClick}
           className="w-40 lg:w-fit h-16 lg:h-fit flex flex-col justify-center border-b-2 lg:border-0"
@@ -44,7 +44,7 @@ function NavLinks(props) {
           </li>
         )}
       </div>
-      <div className="absolute flex w-full h-20 z-0 gap-3 items-center justify-end pr-8 bg-[#EEF3F8] lg:bg-transparent">
+      <div className="absolute flex w-full h-20 gap-3 items-center justify-end pr-8 bg-[#EEF3F8] lg:bg-transparent">
         {auth.isLoggedIn && (
           <li onClick={props.onClick}>
             <NavLink to="/places/new" className={navLinkStyle}>
