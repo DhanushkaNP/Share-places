@@ -1,9 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 // import "./Button.css";
 
 const Button = (props) => {
+  const navigate = useNavigate();
+  function navigateHandler(link) {
+    navigate(link);
+  }
+
   if (props.href) {
     return (
       <a
@@ -16,19 +20,31 @@ const Button = (props) => {
       </a>
     );
   }
-  if (props.to) {
+
+  if (props.to && props.white) {
     return (
-      <Link
-        to={props.to}
-        exact={props.exact}
-        className={`btn ${props.inverse && "btn-inverse"} ${
-          props.danger && "btn-danger"
-        }`}
+      <button
+        className={" btn-white"}
+        onClick={() => navigateHandler(props.to)}
       >
         {props.children}
-      </Link>
+      </button>
     );
   }
+
+  if (props.to) {
+    return (
+      <button
+        className={`btn ${props.inverse && "btn-inverse"} ${
+          props.danger && "btn-danger"
+        } `}
+        onClick={() => navigateHandler(props.to)}
+      >
+        {props.children}
+      </button>
+    );
+  }
+
   return (
     <button
       className={`btn ${props.inverse && "btn-inverse"} ${
