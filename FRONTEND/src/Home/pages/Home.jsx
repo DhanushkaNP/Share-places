@@ -17,7 +17,7 @@ function Home() {
         </div>
       </BackgroundSection>
 
-      <div className="h-min w-full bg-secondary/50">
+      <div className="h-min bg-secondary/50">
         <Places main link={"/places/all"} />
       </div>
     </React.Fragment>
