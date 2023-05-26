@@ -54,6 +54,11 @@ function PlaceList(props) {
             />
           ))}
         </CardHolder>
+        <div className="flex justify-center pb-10">
+          <Button to="/places" white>
+            Load more...
+          </Button>
+        </div>
       </BackgroundSection>
     );
   } else {
