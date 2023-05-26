@@ -20,7 +20,8 @@ function App() {
   if (token) {
     routes = (
       <React.Fragment>
-        <Route path="/" element={<Users />} />
+        <Route path="/" element={<AllPlaces logged />} />
+        <Route path="/users" element={<Users />} />
         <Route path="/:userId/places" element={<UserPlaces />} />
         <Route path="/places/new" element={<NewPlace />} />
         <Route path="/places/:placeId" element={<UpdatePlace />} />
