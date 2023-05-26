@@ -89,7 +89,7 @@ function PlaceItem(props) {
             <h3
               inverse
               onClick={openMapHandler}
-              className=" text-xs inline-block ml-1"
+              className=" text-sm inline-block ml-1"
             >
               {props.address}
             </h3>
