@@ -9,8 +9,8 @@ function NavLinks(props) {
 
   const navLinkStyle = ({ isActive }) => {
     return isActive
-      ? "font-bold lg:underline decoration-0 underline-offset-8 "
-      : "font-normal align-middle";
+      ? "font-bold lg:underline decoration-0 underline-offset-8 w-max"
+      : "font-normal align-middle w-max";
   };
 
   return (
@@ -25,14 +25,26 @@ function NavLinks(props) {
           </NavLink>
         </li>
 
-        <li
-          onClick={props.onClick}
-          className="w-40 lg:w-fit h-16 lg:h-fit flex flex-col justify-center border-b-2 lg:border-0"
-        >
-          <NavLink to="/places" className={navLinkStyle}>
-            Places
-          </NavLink>
-        </li>
+        {!auth.isLoggedIn && (
+          <li
+            onClick={props.onClick}
+            className="w-40 lg:w-fit h-16 lg:h-fit flex flex-col justify-center border-b-2 lg:border-0"
+          >
+            <NavLink to="/places" className={navLinkStyle}>
+              Places
+            </NavLink>
+          </li>
+        )}
+        {auth.isLoggedIn && (
+          <li
+            onClick={props.onClick}
+            className="w-40 lg:w-fit h-16 lg:h-fit flex flex-col justify-center border-b-2 lg:border-0"
+          >
+            <NavLink to="/users" className={navLinkStyle}>
+              Users
+            </NavLink>
+          </li>
+        )}
         {auth.isLoggedIn && (
           <li
             onClick={props.onClick}
