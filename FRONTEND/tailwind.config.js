@@ -11,10 +11,14 @@ module.exports = {
         btn: "#FA8443",
         "btn-dark": "#B33F00",
       },
-    },
-    fontFamily: {
-      body: ["Poppins"],
-      title: ["Luckiest Guy"],
+      fontFamily: {
+        body: ["Poppins"],
+        title: ["Luckiest Guy"],
+        card: ["Lato"],
+      },
+      height: {
+        card: "58rem",
+      },
     },
   },
   plugins: [],
