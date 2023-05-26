@@ -30,7 +30,7 @@ function Places(props) {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
-        <div className="center">
+        <div className=" text-center">
           <LoadingSpinner asOverlay />
         </div>
       )}
