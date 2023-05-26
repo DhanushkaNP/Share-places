@@ -3,9 +3,9 @@ import Button from "../../shared/components/FormElements/Button";
 
 export default function HomeContent() {
   return (
-    <div className="mx-4 w-fit pt-8 lg:pt-0 lg:mt-20 lg:ml-24 lg:mb-8 box-content">
-      <h2 className="text-5xl font-bold">explore beautiful world!</h2>
-      <h2 className="text-5xl font-bold">
+    <div className="w-fit pt-8 lg:pt-0 lg:mt-20 lg:ml-24 lg:mb-8 box-content">
+      <h2 className="text-6xl font-bold">explore beautiful world!</h2>
+      <h2 className="text-6xl font-bold">
         Share your beautiful places with us.
       </h2>
       <p className="font-light w-3/4 pt-5">
