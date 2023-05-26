@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
 import PlaceItem from "./PlaceItem";
-import "./PlaceList.css";
+import BackgroundSection from "../../shared/components/UIElements/BackgroundSection";
 
 function PlaceList(props) {
   const [sixPlaces, setSixPlaces] = useState([]);
@@ -31,7 +31,13 @@ function PlaceList(props) {
   }
   if (props.main) {
     return (
-      <ul className="place-list">
+      <BackgroundSection className="bg-none mt-8 lg:mt-0">
+        <div className="pt-10 lg:pt-24">
+          <h3 className="text-4xl font-bold">Explore Places...</h3>
+          <p className=" font-light">
+            Places that other users shared. enjoy.....
+          </p>
+        </div>
         {sixPlaces.map((place) => (
           <PlaceItem
             key={place.id}
@@ -45,11 +51,11 @@ function PlaceList(props) {
             onDelete={props.onDeletePlace}
           />
         ))}
-      </ul>
+      </BackgroundSection>
     );
   } else {
     return (
-      <ul className="place-list">
+      <BackgroundSection>
         {props.items.map((place) => (
           <PlaceItem
             key={place.id}
@@ -63,7 +69,7 @@ function PlaceList(props) {
             onDelete={props.onDeletePlace}
           />
         ))}
-      </ul>
+      </BackgroundSection>
     );
   }
 }
