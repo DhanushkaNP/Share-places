@@ -30,6 +30,10 @@
 .backdrop{
   @apply w-full h-screen fixed bg-black/75 z-50
 }
+
+.card{
+  @apply shadow-md rounded-md bg-white overflow-hidden
+}
 /* @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
 * {
