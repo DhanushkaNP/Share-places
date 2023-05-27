@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "../../shared/hooks/form-hook";
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
@@ -8,7 +9,7 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 import { AuthContext } from "../../shared/context/auth-context";
 import useHttpRequest from "../../shared/hooks/http-hook";
-import { useNavigate } from "react-router-dom";
+
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -20,6 +21,15 @@ function Auth() {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const [isLoging, setIsLoging] = useState(true);
+
+  const currentPath = useLocation().pathname;
+  useEffect(() => {
+    if (currentPath === "/signup") {
+      setIsLoging(false);
+    } else {
+      setIsLoging(true);
+    }
+  }, [currentPath]);
 
   const { isLoading, error, sendRequest, clearError } = useHttpRequest();
 
