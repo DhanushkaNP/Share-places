@@ -66,14 +66,14 @@ function NavLinks(props) {
         )}
         {!auth.isLoggedIn && (
           <li onClick={props.onClick}>
-            <Button to="/auth" className={navLinkStyle} inverse>
+            <Button to="/login" className={navLinkStyle} inverse>
               Login
             </Button>
           </li>
         )}
         {!auth.isLoggedIn && (
           <li onClick={props.onClick}>
-            <Button to="/auth" className={navLinkStyle} inverse>
+            <Button to="/signup" className={navLinkStyle} inverse>
               Sign up
             </Button>
           </li>
