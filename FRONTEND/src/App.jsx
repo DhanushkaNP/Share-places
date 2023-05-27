@@ -34,7 +34,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/places" element={<AllPlaces />} />
         <Route path="/:userId/places" element={<UserPlaces />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/login" element={<Auth />} />
+        <Route path="/signup" element={<Auth />} />
         <Route path="*" element={<Auth />} />
       </React.Fragment>
     );
