@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
 import PlaceItem from "./PlaceItem";
@@ -8,6 +9,7 @@ import CardTitle from "./CardTitle";
 // import "./PlaceList.css";
 
 function PlaceList(props) {
+  const auth = useContext(AuthContext);
   const [sixPlaces, setSixPlaces] = useState([]);
   console.log(props.items.length);
   useEffect(() => {
@@ -39,6 +41,7 @@ function PlaceList(props) {
           title="Explore Places..."
           description="Places that other users shared. enjoy....."
         />
+
         <CardHolder>
           {sixPlaces.map((place) => (
             <PlaceItem
@@ -64,10 +67,13 @@ function PlaceList(props) {
   } else {
     return (
       <BackgroundSection>
-        <CardTitle
-          title="All Places..."
-          description="Places that other users shared. "
-        />
+        {!auth.isLoggedIn && (
+          <CardTitle
+            title="All Places..."
+            description="Places that other users shared. "
+          />
+        )}
+
         <CardHolder>
           {props.items.map((place) => (
             <PlaceItem
