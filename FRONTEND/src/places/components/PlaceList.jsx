@@ -11,18 +11,14 @@ import CardTitle from "./CardTitle";
 function PlaceList(props) {
   const auth = useContext(AuthContext);
   const [sixPlaces, setSixPlaces] = useState([]);
-  console.log(props.items.length);
   useEffect(() => {
     if (props.items.length > 6) {
       const result = props.items.slice(0, 6);
       setSixPlaces(result);
     } else {
-      console.log(props.items);
       setSixPlaces(props.items);
     }
   }, [props.items]);
-
-  console.log(sixPlaces);
 
   if (props.items.length === 0) {
     return (
