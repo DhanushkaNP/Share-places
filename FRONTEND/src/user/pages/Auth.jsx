@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "../../shared/hooks/form-hook";
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
-import Card from "../../shared/components/UIElements/Card";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
@@ -17,7 +17,7 @@ import {
   VALIDATOR_REQUIRE,
 } from "../../shared/util/validators";
 
-import "./Auth.css";
+// import "./Auth.css";
 
 function Auth() {
   const navigate = useNavigate();
@@ -118,57 +118,83 @@ function Auth() {
   const content = (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <div className=" h-100 bg-white z-40">
-        <Card className="authentication">
-          {isLoading && <LoadingSpinner asOverlay />}
-          <h2>{isLoging ? "Login" : "Signup"} Required</h2>
-          <hr />
-          <form onSubmit={authSubmitHandler}>
-            {!isLoging && (
-              <Input
-                element="input"
-                type="text"
-                id="name"
-                label="Name"
-                errorText="Please Enter a Name here"
-                validators={[VALIDATOR_REQUIRE()]}
-                onInput={inputHandler}
-              />
-            )}
-            {!isLoging && (
-              <ImageUpload
-                id="image"
-                center
-                onInput={inputHandler}
-                errorText="Pleasae provide an image."
-              />
-            )}
-            <Input
-              element="input"
-              type="email"
-              id="email"
-              label="Email"
-              errorText="Please Enter a valid Email address"
-              validators={[VALIDATOR_EMAIL()]}
-              onInput={inputHandler}
-            />
-            <Input
-              element="input"
-              type="password"
-              id="password"
-              label="Password"
-              errorText="Please Enter a valid password (requrie at least 8 characters"
-              validators={[VALIDATOR_MINLENGTH(8)]}
-              onInput={inputHandler}
-            />
-            <Button inverse onClick={switchModeHandler} type="button">
-              {isLoging ? "Switch to SignUp" : "Switch to Login"}
-            </Button>
-            <Button type="submit" disabled={!formState.isValid}>
-              {isLoging ? "Login" : "SignUp"}
-            </Button>
-          </form>
-        </Card>
+      <div className="h-screen p-4">
+        <div className=" border-4 h-full lg:grid lg:grid-cols-2">
+          <div className="h-full flex flex-col gap-3 lg:justify-between">
+            <h1 className="font-title text-3xl text-primary ml-5 lg:ml-14 lg:mt-8 border-2">
+              <Link to="/">Share Places</Link>
+            </h1>
+            <div className="border-2 mt-[-2rem] mx-40">
+              {isLoading && <LoadingSpinner asOverlay />}
+              <div className=" flex justify-between">
+                <h2 className=" inline-block text-xl font-semibold">
+                  {isLoging ? "Login" : "Signup"}{" "}
+                </h2>
+                <button
+                  inverse
+                  onClick={switchModeHandler}
+                  type="button"
+                  className=" text-sm font-semibold text-tertiary hover:text-primary"
+                >
+                  {isLoging ? "Switch to SignUp" : "Switch to Login"}
+                </button>
+              </div>
+              <hr />
+              <form onSubmit={authSubmitHandler} className="w-full">
+                {!isLoging && (
+                  <Input
+                    element="input"
+                    type="text"
+                    id="name"
+                    label="Name"
+                    placeholder="Enter your name"
+                    errorText="Please Enter a Name here"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    onInput={inputHandler}
+                  />
+                )}
+                {!isLoging && (
+                  <ImageUpload
+                    id="image"
+                    center
+                    onInput={inputHandler}
+                    errorText="Pleasae provide an image."
+                  />
+                )}
+                <Input
+                  element="input"
+                  placeholder="Enter your email address"
+                  type="email"
+                  id="email"
+                  label="Email"
+                  errorText="Please Enter a valid Email address"
+                  validators={[VALIDATOR_EMAIL()]}
+                  onInput={inputHandler}
+                />
+                <Input
+                  element="input"
+                  type="password"
+                  placeholder="password"
+                  id="password"
+                  label="Password"
+                  errorText="Please Enter a valid password (requrie at least 8 characters"
+                  validators={[VALIDATOR_MINLENGTH(8)]}
+                  onInput={inputHandler}
+                />
+
+                <Button
+                  className="w-full text-lg mt-10 px-2"
+                  type="submit"
+                  disabled={!formState.isValid}
+                >
+                  {isLoging ? "Login" : "SignUp"}
+                </Button>
+              </form>
+            </div>
+            <div>2023 Share Places. All Right Reserved</div>
+          </div>
+        </div>
+        <div></div>
       </div>
     </React.Fragment>
   );
