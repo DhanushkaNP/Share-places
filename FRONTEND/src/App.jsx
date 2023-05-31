@@ -4,6 +4,8 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Users from "./user/pages/Users";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import { AuthContext } from "./shared/context/auth-context";
+import { NavContext } from "./shared/context/nav-context";
+import useNav from "./shared/hooks/nav-hook";
 import useAuth from "./shared/hooks/auth-hook";
 import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
 import AllPlaces from "./places/pages/AllPlaces";
@@ -16,6 +18,7 @@ const Auth = lazy(() => import("./user/pages/Auth"));
 
 function App() {
   const { token, login, logout, userId } = useAuth();
+  const [isNavigationOn, setNav] = useNav();
   let routes;
   if (token) {
     routes = (
@@ -51,20 +54,24 @@ function App() {
         userId: userId,
       }}
     >
-      <BrowserRouter>
-        <MainNavigation />
-        <main>
-          <Suspense
-            fallback={
-              <div className="center">
-                <LoadingSpinner />
-              </div>
-            }
-          >
-            <Routes>{routes}</Routes>
-          </Suspense>
-        </main>
-      </BrowserRouter>
+      <NavContext.Provider
+        value={{ isNavigationOn: isNavigationOn, setNav: setNav }}
+      >
+        <BrowserRouter>
+          <MainNavigation />
+          <main>
+            <Suspense
+              fallback={
+                <div className="center">
+                  <LoadingSpinner />
+                </div>
+              }
+            >
+              <Routes>{routes}</Routes>
+            </Suspense>
+          </main>
+        </BrowserRouter>
+      </NavContext.Provider>
     </AuthContext.Provider>
   );
 }
