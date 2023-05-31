@@ -48,3 +48,6 @@ nodemon.json
 
 #images
 *.jpeg
+
+#others
+*.vscode
