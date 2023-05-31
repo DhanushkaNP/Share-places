@@ -1,15 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import Places from "../../places/components/Places";
 import HomeContent from "../components/HomeContent";
 import HomeImage from "../components/HomeImage";
 import BackgroundSection from "../../shared/components/UIElements/BackgroundSection";
-import NavigationTrigger from "../../shared/components/Navigation/NavigationTrigger";
 
 function Home() {
   return (
     <React.Fragment>
-      <NavigationTrigger />
-      {/* <NavigationTrigger /> */}
       <BackgroundSection>
         <div className="lg:grid lg:grid-cols-2 h-max lg:p-12 pb-0">
           {/* first grid child */}
