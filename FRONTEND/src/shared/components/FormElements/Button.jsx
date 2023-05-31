@@ -1,7 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { twMerge } from "tailwind-merge";
-
 // import "./Button.css";
 
 const Button = (props) => {
@@ -10,13 +8,14 @@ const Button = (props) => {
     navigate(link);
   }
 
-  const styles = `btn ${props.inverse && "btn-inverse"} ${
-    props.danger && "btn-danger"
-  }`;
-
   if (props.href) {
     return (
-      <a className={twMerge(styles, props.className)} href={props.href}>
+      <a
+        className={`btn ${props.inverse && "btn-inverse"} ${
+          props.danger && "btn-danger"
+        }`}
+        href={props.href}
+      >
         {props.children}
       </a>
     );
@@ -36,7 +35,9 @@ const Button = (props) => {
   if (props.to) {
     return (
       <button
-        className={twMerge(styles, props.className)}
+        className={`btn ${props.inverse && "btn-inverse"} ${
+          props.danger && "btn-danger"
+        } `}
         onClick={() => navigateHandler(props.to)}
       >
         {props.children}
@@ -46,7 +47,9 @@ const Button = (props) => {
 
   return (
     <button
-      className={twMerge(styles, props.className)}
+      className={`btn ${props.inverse && "btn-inverse"} ${
+        props.danger && "btn-danger"
+      }`}
       type={props.type}
       onClick={props.onClick}
       disabled={props.disabled}
