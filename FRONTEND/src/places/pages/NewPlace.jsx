@@ -5,7 +5,7 @@ import Input from "../../shared/components/FormElements/Input";
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
-} from "../../shared/components/util/validators";
+} from "../../shared/util/validators";
 import { useForm } from "../../shared/hooks/form-hook";
 import useHttpRequest from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";

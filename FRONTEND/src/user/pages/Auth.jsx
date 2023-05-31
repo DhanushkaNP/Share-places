@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "../../shared/hooks/form-hook";
 import Input from "../../shared/components/FormElements/Input";
@@ -7,19 +8,22 @@ import Card from "../../shared/components/UIElements/Card";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+import { NavContext } from "../../shared/context/nav-context";
 import { AuthContext } from "../../shared/context/auth-context";
 import useHttpRequest from "../../shared/hooks/http-hook";
-
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
-} from "../../shared/components/util/validators";
+} from "../../shared/util/validators";
+
 import "./Auth.css";
 
 function Auth() {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const nav = useContext(NavContext);
+  nav.setNav(false);
   const [isLoging, setIsLoging] = useState(true);
 
   const currentPath = useLocation().pathname;
@@ -111,61 +115,65 @@ function Auth() {
     setIsLoging((prevVlaue) => !prevVlaue);
   }
 
-  return (
+  const content = (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <Card className="authentication">
-        {isLoading && <LoadingSpinner asOverlay />}
-        <h2>{isLoging ? "Login" : "Signup"} Required</h2>
-        <hr />
-        <form onSubmit={authSubmitHandler}>
-          {!isLoging && (
+      <div className=" h-100 bg-white z-40">
+        <Card className="authentication">
+          {isLoading && <LoadingSpinner asOverlay />}
+          <h2>{isLoging ? "Login" : "Signup"} Required</h2>
+          <hr />
+          <form onSubmit={authSubmitHandler}>
+            {!isLoging && (
+              <Input
+                element="input"
+                type="text"
+                id="name"
+                label="Name"
+                errorText="Please Enter a Name here"
+                validators={[VALIDATOR_REQUIRE()]}
+                onInput={inputHandler}
+              />
+            )}
+            {!isLoging && (
+              <ImageUpload
+                id="image"
+                center
+                onInput={inputHandler}
+                errorText="Pleasae provide an image."
+              />
+            )}
             <Input
               element="input"
-              type="text"
-              id="name"
-              label="Name"
-              errorText="Please Enter a Name here"
-              validators={[VALIDATOR_REQUIRE()]}
+              type="email"
+              id="email"
+              label="Email"
+              errorText="Please Enter a valid Email address"
+              validators={[VALIDATOR_EMAIL()]}
               onInput={inputHandler}
             />
-          )}
-          {!isLoging && (
-            <ImageUpload
-              id="image"
-              center
+            <Input
+              element="input"
+              type="password"
+              id="password"
+              label="Password"
+              errorText="Please Enter a valid password (requrie at least 8 characters"
+              validators={[VALIDATOR_MINLENGTH(8)]}
               onInput={inputHandler}
-              errorText="Pleasae provide an image."
             />
-          )}
-          <Input
-            element="input"
-            type="email"
-            id="email"
-            label="Email"
-            errorText="Please Enter a valid Email address"
-            validators={[VALIDATOR_EMAIL()]}
-            onInput={inputHandler}
-          />
-          <Input
-            element="input"
-            type="password"
-            id="password"
-            label="Password"
-            errorText="Please Enter a valid password (requrie at least 8 characters"
-            validators={[VALIDATOR_MINLENGTH(8)]}
-            onInput={inputHandler}
-          />
-          <Button inverse onClick={switchModeHandler} type="button">
-            {isLoging ? "Switch to SignUp" : "Switch to Login"}
-          </Button>
-          <Button type="submit" disabled={!formState.isValid}>
-            {isLoging ? "Login" : "SignUp"}
-          </Button>
-        </form>
-      </Card>
+            <Button inverse onClick={switchModeHandler} type="button">
+              {isLoging ? "Switch to SignUp" : "Switch to Login"}
+            </Button>
+            <Button type="submit" disabled={!formState.isValid}>
+              {isLoging ? "Login" : "SignUp"}
+            </Button>
+          </form>
+        </Card>
+      </div>
     </React.Fragment>
   );
+
+  return createPortal(content, document.getElementById("auth"));
 }
 
 export default Auth;

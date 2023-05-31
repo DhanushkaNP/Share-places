@@ -10,7 +10,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
-} from "../../shared/components/util/validators";
+} from "../../shared/util/validators";
 import "./PlaceForm.css";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 
