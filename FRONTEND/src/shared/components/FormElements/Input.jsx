@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react";
 import { validate } from "../../util/validators";
-import "./Input.css";
+// import "./Input.css";
 
 function inputReducer(state, action) {
   switch (action.type) {
@@ -57,6 +57,7 @@ function Input(props) {
         onChange={changeHandler}
         value={inputState.value}
         onBlur={touchHandler}
+        className="w-full text-base p-2 rounded border border-form"
       />
     ) : (
       <textarea
@@ -65,18 +66,23 @@ function Input(props) {
         onChange={changeHandler}
         value={inputState.value}
         onBlur={touchHandler}
+        className="w-full text-base p-2 rounded border border-form"
       />
     );
 
   return (
     <div
-      className={`form-control ${
-        !inputState.isValid && inputState.isTouched && "form-control--invalid"
+      className={` py-2 w-full ${
+        !inputState.isValid &&
+        inputState.isTouched &&
+        " [&>input]:border-red-600 [&>input]:border-2"
       }`}
     >
-      <label htmlFor={props.id}>{props.label}</label>
+      {/* <label htmlFor={props.id}>{props.label}</label> */}
       {element}
-      {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
+      {!inputState.isValid && inputState.isTouched && (
+        <p className=" text-red-600 text-sm font-light">{props.errorText}</p>
+      )}
     </div>
   );
 }
