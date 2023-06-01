@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/auth-context";
 import Button from "../FormElements/Button";
+import AddIcon from "@mui/icons-material/Add";
 // import "./NavLinks.css";
 
 function NavLinks(props) {
@@ -59,9 +60,10 @@ function NavLinks(props) {
       <div className="absolute flex w-full h-20 gap-3 items-center justify-end pr-8 bg-[#EEF3F8] lg:bg-transparent">
         {auth.isLoggedIn && (
           <li onClick={props.onClick}>
-            <NavLink to="/places/new" className={navLinkStyle}>
-              ADD PLACES
-            </NavLink>
+            <Button to="/places/new" inverse className=" !pl-0 !pr-1 ">
+              <AddIcon />
+              ADD A PLACE
+            </Button>
           </li>
         )}
         {!auth.isLoggedIn && (
