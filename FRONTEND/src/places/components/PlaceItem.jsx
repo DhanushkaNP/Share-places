@@ -98,12 +98,22 @@ function PlaceItem(props) {
           <h2 className=" font-extrabold">{props.title}</h2>
           <p className=" h-20 font-normal text-gray-500">{props.description}</p>
         </div>
-        <div className="">
+        <div className=" flex gap-2 m-2">
           {auth.userId === props.creatorId && (
-            <Button to={`/places/${props.id}`}>EDIT</Button>
+            <Button
+              to={`/places/${props.id}`}
+              inverse
+              className="!py-1 !px-3 !text-sm"
+            >
+              EDIT
+            </Button>
           )}
           {auth.userId === props.creatorId && (
-            <Button danger onClick={showDeleteWarningHandler}>
+            <Button
+              danger
+              onClick={showDeleteWarningHandler}
+              className="!py-1 !px-3 !text-sm"
+            >
               DELETE
             </Button>
           )}
