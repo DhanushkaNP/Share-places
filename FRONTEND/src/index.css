@@ -16,7 +16,7 @@
 }
 
 .btn-danger{
-  @apply text-red-700 bg-white border-red-900 border-2 hover:text-white hover:bg-red-900 hover:border-red-900 transition ease-out duration-500
+  @apply text-red-900 bg-white border-red-900 border-2 hover:text-white hover:bg-red-900 hover:border-red-900 transition ease-out duration-500
 }
 
 .btn-nav{
