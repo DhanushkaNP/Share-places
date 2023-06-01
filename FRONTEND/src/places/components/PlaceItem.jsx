@@ -48,11 +48,11 @@ function PlaceItem(props) {
         show={showMap}
         onCancel={closeMapHandler}
         header={props.address}
-        contentClass="place-item-modal-content"
-        footerClass="place-item-modal-actions"
+        contentClass="!p-0"
+        footerClass=" text-right"
         footer={<Button onClick={closeMapHandler}>Close</Button>}
       >
-        <div className="map-container">
+        <div className=" h-80 w-full">
           <Map center={props.coordinates} zoom={16} />
         </div>
       </Modal>
@@ -61,7 +61,7 @@ function PlaceItem(props) {
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
         header="Are you sure?"
-        footerClass="place-item-modal-actions"
+        footerClass=" text-right [&>button]:m-2 [&>a]:m-2 "
         footer={
           <React.Fragment>
             <Button inverse onClick={cancelDeleteHandler}>

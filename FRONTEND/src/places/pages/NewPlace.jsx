@@ -11,8 +11,8 @@ import useHttpRequest from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
-import "./PlaceForm.css";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+import BackgroundSection from "../../shared/components/UIElements/BackgroundSection";
 
 function NewPlace() {
   const auth = useContext(AuthContext);
@@ -61,45 +61,50 @@ function NewPlace() {
 
   return (
     <React.Fragment>
-      <ErrorModal error={error} onClear={clearError} />
-      <form className="place-form" onSubmit={placeSubmitHandler}>
-        {isLoading && <LoadingSpinner asOverlay />}
-        <Input
-          id="title"
-          type="text"
-          label="Title"
-          element="input"
-          errorText="Please input a valid title"
-          validators={[VALIDATOR_REQUIRE()]}
-          onInput={inputHandler}
-        />
-        <Input
-          id="description"
-          label="Description"
-          element="textarea"
-          errorText="Please enter a valid description (at least 5 characters)"
-          validators={[VALIDATOR_MINLENGTH(5)]}
-          onInput={inputHandler}
-        />
-        <Input
-          id="address"
-          type="text"
-          label="Address"
-          element="input"
-          errorText="Please enter a valid Address"
-          validators={[VALIDATOR_REQUIRE()]}
-          onInput={inputHandler}
-        />
-        <ImageUpload
-          id="image"
-          placeholder="Add a picture"
-          onInput={inputHandler}
-          errorText="Pleasae provide an image."
-        />
-        <Button type="submit" disabled={!formState.isValid}>
-          Add place
-        </Button>
-      </form>
+      <BackgroundSection>
+        <ErrorModal error={error} onClear={clearError} />
+        <form
+          className="mx-auto p-4 w-11/12 md:w-2/5 shadow-md rounded bg-white"
+          onSubmit={placeSubmitHandler}
+        >
+          {isLoading && <LoadingSpinner asOverlay />}
+          <Input
+            id="title"
+            type="text"
+            label="Title"
+            element="input"
+            errorText="Please input a valid title"
+            validators={[VALIDATOR_REQUIRE()]}
+            onInput={inputHandler}
+          />
+          <Input
+            id="description"
+            label="Description"
+            element="textarea"
+            errorText="Please enter a valid description (at least 5 characters)"
+            validators={[VALIDATOR_MINLENGTH(5)]}
+            onInput={inputHandler}
+          />
+          <Input
+            id="address"
+            type="text"
+            label="Address"
+            element="input"
+            errorText="Please enter a valid Address"
+            validators={[VALIDATOR_REQUIRE()]}
+            onInput={inputHandler}
+          />
+          <ImageUpload
+            id="image"
+            placeholder="Add a picture"
+            onInput={inputHandler}
+            errorText="Pleasae provide an image."
+          />
+          <Button type="submit" disabled={!formState.isValid}>
+            Add place
+          </Button>
+        </form>
+      </BackgroundSection>
     </React.Fragment>
   );
 }

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import AddIcon from "@mui/icons-material/Add";
-// import "./ImageUpload.css";
 
 function ImageUpload(props) {
   const [file, setFile] = useState();

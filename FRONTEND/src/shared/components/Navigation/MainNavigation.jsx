@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "../UIElements/Backdrop";
-// import "./MainNavigation.css";
 import React, { useState } from "react";
 
 function MainNavigation(props) {

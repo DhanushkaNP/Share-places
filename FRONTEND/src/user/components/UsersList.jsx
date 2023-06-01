@@ -1,7 +1,6 @@
 import BackgroundSection from "../../shared/components/UIElements/BackgroundSection";
 import Card from "../../shared/components/UIElements/Card";
 import UserItem from "./UserItem";
-import "./UsersList.css";
 
 function UsersList(props) {
   if (!props.items) {

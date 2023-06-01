@@ -1,8 +1,6 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-// import "./Card.css";
-
 function Card(props) {
   const style = twMerge(
     "shadow-md rounded-md bg-white overflow-hidden",

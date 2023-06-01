@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import "./MainHeader.css";
 import { NavContext } from "../../context/nav-context";
 
 function MainHeader(props) {

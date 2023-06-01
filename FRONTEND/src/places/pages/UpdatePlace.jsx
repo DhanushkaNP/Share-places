@@ -11,8 +11,9 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
 } from "../../shared/util/validators";
-import "./PlaceForm.css";
+// import "./PlaceForm.css";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import BackgroundSection from "../../shared/components/UIElements/BackgroundSection";
 
 function UpdatePlace() {
   const auth = useContext(AuthContext);
@@ -99,33 +100,38 @@ function UpdatePlace() {
   }
   return (
     <React.Fragment>
-      <ErrorModal error={error} onClear={clearError} />
-      <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
-        <Input
-          element="input"
-          id="title"
-          type="text"
-          value={formState.inputs.title.value}
-          label="Title"
-          validators={[VALIDATOR_REQUIRE()]}
-          valid={formState.inputs.title.isValid}
-          errorText="Please input a valid title"
-          onInput={inputHandler}
-        />
-        <Input
-          id="description"
-          element="textarea"
-          value={formState.inputs.description.value}
-          label="Description"
-          validators={[VALIDATOR_MINLENGTH(5)]}
-          valid={formState.inputs.description.isValid}
-          errorText="Please enter a valid description (at least 5 characters)"
-          onInput={inputHandler}
-        />
-        <Button type="submit" disabled={!formState.isValid}>
-          Update Place
-        </Button>
-      </form>
+      <BackgroundSection className=" pt-10">
+        <ErrorModal error={error} onClear={clearError} />
+        <form
+          className="mx-auto p-4 w-11/12 md:w-2/5 shadow-md rounded bg-white"
+          onSubmit={placeUpdateSubmitHandler}
+        >
+          <Input
+            element="input"
+            id="title"
+            type="text"
+            value={formState.inputs.title.value}
+            label="Title"
+            validators={[VALIDATOR_REQUIRE()]}
+            valid={formState.inputs.title.isValid}
+            errorText="Please input a valid title"
+            onInput={inputHandler}
+          />
+          <Input
+            id="description"
+            element="textarea"
+            value={formState.inputs.description.value}
+            label="Description"
+            validators={[VALIDATOR_MINLENGTH(5)]}
+            valid={formState.inputs.description.isValid}
+            errorText="Please enter a valid description (at least 5 characters)"
+            onInput={inputHandler}
+          />
+          <Button type="submit" disabled={!formState.isValid}>
+            Update Place
+          </Button>
+        </form>
+      </BackgroundSection>
     </React.Fragment>
   );
 }

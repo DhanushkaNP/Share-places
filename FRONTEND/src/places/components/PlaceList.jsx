@@ -6,7 +6,6 @@ import PlaceItem from "./PlaceItem";
 import BackgroundSection from "../../shared/components/UIElements/BackgroundSection";
 import CardHolder from "../../shared/components/UIElements/CardHolder";
 import CardTitle from "./CardTitle";
-// import "./PlaceList.css";
 
 function PlaceList(props) {
   const auth = useContext(AuthContext);

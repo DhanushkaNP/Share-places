@@ -28,7 +28,7 @@
 }
 
 .backdrop{
-  @apply w-full h-screen fixed bg-black/75 z-50
+  @apply w-full h-screen fixed bg-black/75 z-40
 }
 
 .card{

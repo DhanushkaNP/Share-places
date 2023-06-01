@@ -18,8 +18,6 @@ import {
 } from "../../shared/util/validators";
 import BackgroundSection from "../../shared/components/UIElements/BackgroundSection";
 
-// import "./Auth.css";
-
 function Auth() {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
