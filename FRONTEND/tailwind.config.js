@@ -8,6 +8,7 @@ module.exports = {
         secondary: "#E2F6FC",
         text: "#333333",
         "text-second": "#8F8F8F",
+        form: "#D0D0D0",
         btn: "#FA8443",
         "btn-dark": "#B33F00",
       },
