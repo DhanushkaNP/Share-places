@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "../../shared/hooks/form-hook";
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
@@ -16,8 +16,9 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
 } from "../../shared/util/validators";
+import BackgroundSection from "../../shared/components/UIElements/BackgroundSection";
 
-import "./Auth.css";
+// import "./Auth.css";
 
 function Auth() {
   const navigate = useNavigate();
@@ -115,15 +116,43 @@ function Auth() {
     setIsLoging((prevVlaue) => !prevVlaue);
   }
 
-  const content = (
-    <React.Fragment>
+  return (
+    <BackgroundSection className=" !px-0 lg:px-4">
       <ErrorModal error={error} onClear={clearError} />
-      <div className=" h-100 bg-white z-40">
-        <Card className="authentication">
+      <div
+        className={`flex justify-center items-center -mt-10 h-screen my-auto ${
+          !isLoging && " !mt-0"
+        }`}
+      >
+        <Card
+          className={`w-5/6 md:w-1/2 lg:w-1/3 ${
+            !isLoging && " lg:w-2/5"
+          } p-5 shadow-xl`}
+        >
           {isLoading && <LoadingSpinner asOverlay />}
-          <h2>{isLoging ? "Login" : "Signup"} Required</h2>
-          <hr />
+          <div className="flex justify-between my-2">
+            <h2 className=" inline-block text-2xl font-semibold">
+              {isLoging ? "Login" : "Signup"}
+            </h2>
+            <button
+              onClick={switchModeHandler}
+              type="button"
+              className=" text-sm text-[#0098EA] hover:text-primary"
+            >
+              {isLoging ? "Switch to SignUp" : "Switch to Login"}
+            </button>
+          </div>
+
           <form onSubmit={authSubmitHandler}>
+            {!isLoging && (
+              <ImageUpload
+                id="image"
+                placeholder="Upload a profile picture"
+                center
+                onInput={inputHandler}
+                errorText="Please provide an image."
+              />
+            )}
             {!isLoging && (
               <Input
                 element="input"
@@ -133,16 +162,10 @@ function Auth() {
                 errorText="Please Enter a Name here"
                 validators={[VALIDATOR_REQUIRE()]}
                 onInput={inputHandler}
+                placeholder="Enter your name"
               />
             )}
-            {!isLoging && (
-              <ImageUpload
-                id="image"
-                center
-                onInput={inputHandler}
-                errorText="Pleasae provide an image."
-              />
-            )}
+
             <Input
               element="input"
               type="email"
@@ -151,29 +174,41 @@ function Auth() {
               errorText="Please Enter a valid Email address"
               validators={[VALIDATOR_EMAIL()]}
               onInput={inputHandler}
+              placeholder="Enter Your Email Address"
             />
             <Input
               element="input"
               type="password"
               id="password"
               label="Password"
-              errorText="Please Enter a valid password (requrie at least 8 characters"
+              errorText="Please Enter a valid password (requrie at least 8 characters)"
               validators={[VALIDATOR_MINLENGTH(8)]}
               onInput={inputHandler}
+              placeholder="Password"
             />
-            <Button inverse onClick={switchModeHandler} type="button">
-              {isLoging ? "Switch to SignUp" : "Switch to Login"}
-            </Button>
-            <Button type="submit" disabled={!formState.isValid}>
-              {isLoging ? "Login" : "SignUp"}
-            </Button>
+            <hr className=" mb-5 mt-2" />
+            <div className="flex justify-between last:items-end">
+              <Button
+                type="submit"
+                disabled={!formState.isValid}
+                className="inline-block !py-2 !px-5"
+              >
+                {isLoging ? "Login" : "SignUp"}
+              </Button>
+              <Link
+                to="/"
+                className=" ml-auto underline text-[#0098EA] hover:text-primary"
+              >
+                Home
+              </Link>
+            </div>
           </form>
         </Card>
       </div>
-    </React.Fragment>
+    </BackgroundSection>
   );
 
-  return createPortal(content, document.getElementById("auth"));
+  // return createPortal(content, document.getElementById("auth"));
 }
 
 export default Auth;
