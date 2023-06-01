@@ -5,9 +5,10 @@ import Card from "../../shared/components/UIElements/Card";
 import Map from "../../shared/components/UIElements/Map";
 import Modal from "../../shared/components/UIElements/Modal";
 import { AuthContext } from "../../shared/context/auth-context";
-import "./PlaceItem.css";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import "./PlaceItem.css";
+import FmdGoodIcon from "@mui/icons-material/FmdGood";
 
 function PlaceItem(props) {
   const auth = useContext(AuthContext);
@@ -47,11 +48,11 @@ function PlaceItem(props) {
         show={showMap}
         onCancel={closeMapHandler}
         header={props.address}
-        contentClass="place-item-modal-content"
-        footerClass="place-item-modal-actions"
+        contentClass="!p-0"
+        footerClass=" text-right"
         footer={<Button onClick={closeMapHandler}>Close</Button>}
       >
-        <div className="map-container">
+        <div className=" h-80 w-full">
           <Map center={props.coordinates} zoom={16} />
         </div>
       </Modal>
@@ -60,7 +61,7 @@ function PlaceItem(props) {
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
         header="Are you sure?"
-        footerClass="place-item-modal-actions"
+        footerClass=" text-right [&>button]:m-2 [&>a]:m-2 "
         footer={
           <React.Fragment>
             <Button inverse onClick={cancelDeleteHandler}>
@@ -75,35 +76,49 @@ function PlaceItem(props) {
         <p>Do you want to proceed and delete this page?</p>
       </Modal>
 
-      <li className="place-item">
-        <Card className="place-item-content">
-          {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item-image">
-            <img
-              src={process.env.REACT_APP_ASSEST_URL + props.image}
-              alt={props.title}
-            />
+      <Card>
+        {isLoading && <LoadingSpinner asOverlay />}
+        <img
+          src={process.env.REACT_APP_ASSEST_URL + props.image}
+          alt={props.title}
+          className="w-full h-72 object-cover"
+        />
+        <div className="mx-4 my-6 font-card">
+          <div className="text-primary hover:text-sky-700 cursor-pointer">
+            <FmdGoodIcon style={{ fontSize: "1rem" }} />
+            <h3
+              inverse
+              onClick={openMapHandler}
+              className=" text-sm inline-block ml-1"
+            >
+              {props.address}
+            </h3>
           </div>
-          <div className="place-item-info">
-            <h2>{props.title}</h2>
-            <h3>{props.address}</h3>
-            <p>{props.description}</p>
-          </div>
-          <div className="place-item-actions">
-            <Button inverse onClick={openMapHandler}>
-              VIEW ON MAP
+
+          <h2 className=" font-extrabold">{props.title}</h2>
+          <p className=" h-20 font-normal text-gray-500">{props.description}</p>
+        </div>
+        <div className=" flex gap-2 m-2">
+          {auth.userId === props.creatorId && (
+            <Button
+              to={`/places/${props.id}`}
+              inverse
+              className="!py-1 !px-3 !text-sm"
+            >
+              EDIT
             </Button>
-            {auth.userId === props.creatorId && (
-              <Button to={`/places/${props.id}`}>EDIT</Button>
-            )}
-            {auth.userId === props.creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
-                DELETE
-              </Button>
-            )}
-          </div>
-        </Card>
-      </li>
+          )}
+          {auth.userId === props.creatorId && (
+            <Button
+              danger
+              onClick={showDeleteWarningHandler}
+              className="!py-1 !px-3 !text-sm"
+            >
+              DELETE
+            </Button>
+          )}
+        </div>
+      </Card>
     </React.Fragment>
   );
 }

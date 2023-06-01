@@ -1,39 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-import "./Button.css";
+import { useNavigate } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
 
 const Button = (props) => {
+  const navigate = useNavigate();
+  function navigateHandler(link) {
+    navigate(link);
+  }
+
+  const styles = `btn ${
+    !!props.disabled && " !bg-form !border-form !text-white"
+  } ${!!props.inverse && "btn-inverse"} ${!!props.danger && "btn-danger"}`;
+
   if (props.href) {
     return (
-      <a
-        className={`button button--${props.size || "default"} ${
-          props.inverse && "button--inverse"
-        } ${props.danger && "button--danger"}`}
-        href={props.href}
-      >
+      <a className={twMerge(styles, props.className)} href={props.href}>
         {props.children}
       </a>
     );
   }
-  if (props.to) {
+
+  if (props.to && props.white) {
     return (
-      <Link
-        to={props.to}
-        exact={props.exact}
-        className={`button button--${props.size || "default"} ${
-          props.inverse && "button--inverse"
-        } ${props.danger && "button--danger"}`}
+      <button
+        className={" btn-white"}
+        onClick={() => navigateHandler(props.to)}
       >
         {props.children}
-      </Link>
+      </button>
     );
   }
+
+  if (props.to) {
+    return (
+      <button
+        className={twMerge(styles, props.className)}
+        onClick={() => navigateHandler(props.to)}
+      >
+        {props.children}
+      </button>
+    );
+  }
+
   return (
     <button
-      className={`button button--${props.size || "default"} ${
-        props.inverse && "button--inverse"
-      } ${props.danger && "button--danger"}`}
+      className={twMerge(styles, props.className)}
       type={props.type}
       onClick={props.onClick}
       disabled={props.disabled}

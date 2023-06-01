@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "../UIElements/Backdrop";
-import "./MainNavigation.css";
 import React, { useState } from "react";
 
 function MainNavigation(props) {
@@ -16,28 +15,30 @@ function MainNavigation(props) {
   function closeDrawer() {
     setDrawerIsOpen(false);
   }
+
   return (
     <React.Fragment>
       {drawerIsOpen && <Backdrop onClick={closeDrawer} />}
 
       <SideDrawer show={drawerIsOpen}>
-        <nav className="main-navigation-drawer-nav">
+        <nav className="h-full">
           <NavLinks onClick={closeDrawer} />
         </nav>
       </SideDrawer>
 
       <MainHeader>
-        <button className="main-navigation-menu-btn" onClick={openDrawer}>
-          <span />
-          <span />
-          <span />
-        </button>
-
-        <h1 className="main-navigation-title">
-          <Link to="/">SharePlaces</Link>
+        <div className="flex flex-col justify-center h-20 lg:hidden">
+          <button className="btn-nav group" onClick={openDrawer}>
+            <span className="nav-span" />
+            <span className="nav-span" />
+            <span className="nav-span" />
+          </button>
+        </div>
+        <h1 className="font-title text-3xl	text-primary my-auto ml-5 lg:ml-14 flex-5 z-30">
+          <Link to="/">Share Places</Link>
         </h1>
 
-        <nav className="main-navigation-header-nav">
+        <nav className="my-auto absolute h-20 w-full lg:flex items-center justify-center hidden ">
           <NavLinks />
         </nav>
       </MainHeader>

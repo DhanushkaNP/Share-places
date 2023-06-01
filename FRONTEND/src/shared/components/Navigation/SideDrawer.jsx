@@ -1,16 +1,17 @@
 import { CSSTransition } from "react-transition-group";
-import "./SideDrawer.css";
 
 function SideDrawer(props) {
   return (
     <CSSTransition
       in={props.show}
-      timeout={200}
-      classNames="slide-in-left"
+      timeout={500}
+      classNames="slide-in-right"
       mountOnEnter
       unmountOnExit
     >
-      <aside className="side-drawer">{props.children}</aside>
+      <aside className="absolute bg-white z-50 h-screen w-3/4 shadow-2xl shadow-black">
+        {props.children}
+      </aside>
     </CSSTransition>
   );
 }

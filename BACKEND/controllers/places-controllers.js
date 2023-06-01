@@ -9,7 +9,7 @@ const User = require("../models/user");
 async function getAllPlaces(req, res, next) {
   let places;
   try {
-    places = await Place.find({});
+    places = await Place.find({}).sort({ _id: -1 });
   } catch (err) {
     return next(
       new HttpError("Something went wrong when finding all places", 500)

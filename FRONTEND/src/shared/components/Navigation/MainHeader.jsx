@@ -1,7 +1,17 @@
-import "./MainHeader.css";
+import { useContext } from "react";
+import { NavContext } from "../../context/nav-context";
 
 function MainHeader(props) {
-  return <header className="main-header">{props.children}</header>;
+  const nav = useContext(NavContext);
+  return (
+    <header
+      className={`bg-secondary h-20 z-10 ${
+        nav.isNavigationOn ? "flex" : "hidden"
+      } flex-initial`}
+    >
+      {props.children}
+    </header>
+  );
 }
 
 export default MainHeader;

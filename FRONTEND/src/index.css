@@ -1,4 +1,40 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Luckiest+Guy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+.btn{
+  @apply bg-btn text-white hover:bg-white hover:text-btn hover:border-btn border-2 border-btn py-3 px-6 rounded-md text-base font-medium transition ease-out duration-500
+}
+
+.btn-white{
+  @apply bg-white px-10 py-3 shadow-md rounded-md border border-black/50 font-semibold hover:bg-gray-50
+}
+
+.btn-inverse{
+  @apply !text-btn bg-white border-btn border-[2px] hover:!text-white hover:!bg-btn transition ease-out duration-500 
+}
+
+.btn-danger{
+  @apply text-red-900 bg-white border-red-900 border-2 hover:text-white hover:bg-red-900 hover:border-red-900 transition ease-out duration-500
+}
+
+.btn-nav{
+  @apply w-14 h-14 flex bg-transparent hover:bg-primary flex-col gap-2 justify-center items-center ml-8 border-primary  border-2 rounded-md px-7 drop-shadow-xl cursor-pointer z-30 
+}
+
+.nav-span{
+  @apply block w-12 h-1 bg-primary group-hover:bg-white transition ease-out duration-500
+}
+
+.backdrop{
+  @apply w-full h-screen fixed bg-black/75 z-40
+}
+
+.card{
+  @apply shadow-md rounded-md bg-white overflow-hidden
+}
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -39,4 +75,4 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
