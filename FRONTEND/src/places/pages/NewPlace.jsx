@@ -92,6 +92,7 @@ function NewPlace() {
         />
         <ImageUpload
           id="image"
+          placeholder="Add a picture"
           onInput={inputHandler}
           errorText="Pleasae provide an image."
         />
