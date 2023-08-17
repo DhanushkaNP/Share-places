@@ -1,4 +1,4 @@
-# share places
+# Share places
 A Social media application. This specially builds for the travel enthusiast. People can register as users and they can share they known beautiful places with others. And also it allows users to add images, their experience and the place's location. 
 
 ## Setup
